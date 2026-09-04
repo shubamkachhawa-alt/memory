@@ -71,9 +71,8 @@
             </div>
             <button class="btn-submit" onclick="verifyPassword()">Continue</button>
             <div class="error-msg" id="errorMsg">Wrong Password</div>
-        </div>
+        <img src="IMG-20200831-WA0003.jpg" alt="Photo" class="photo-frame">
     </div>
-
     <div class="container hidden" id="privateCard">
         <video id="secretVideo" class="video-frame" controls autoplay loop playsinline muted>
             <source src="reel.mp4" type="video/mp4">
@@ -85,7 +84,7 @@
     </div>
 
     <script>
-        const SECRET_PIN = "1234";
+        const SECRET_PIN = "1995";
         function openLockScreen() {
             document.getElementById('publicCard').classList.add('hidden');
             document.getElementById('lockCard').classList.remove('hidden');
@@ -96,7 +95,7 @@
             if (userPin === SECRET_PIN) {
                 document.getElementById('lockCard').classList.add('hidden');
                 document.getElementById('privateCard').classList.remove('hidden');
-                document.getElementById('secretVideo').play();
+                document.getElementById('<source src="IMG-20180223-WA0012.jpg" type="video/mp4">').play();
             } else {
                 document.getElementById('errorMsg').style.display = 'block';
                 document.getElementById('passInput').value = '';
