@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memories</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px; color: #333;
+        }
+        .container {
+            width: 100%; max-width: 420px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-radius: 24px; padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            text-align: center; position: relative; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .photo-frame, .video-frame {
+            width: 100%; height: 340px; border-radius: 18px;
+            object-fit: cover; background: #e2e8f0;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15); margin-bottom: 20px;
+        }
+        .shayari-box {
+            font-size: 18px; line-height: 1.8; color: #2d3748;
+            font-weight: 500; margin-bottom: 10px; padding: 0 10px;
+            position: relative;
+        }
+        .secret-heart {
+            position: absolute; top: -10px; right: -5px;
+            background: none; border: none; font-size: 14px;
+            color: rgba(0,0,0,0.15); cursor: pointer; padding: 8px; outline: none;
+        }
+        .secret-heart:hover { color: #e53e3e; }
+        .hidden { display: none !important; }
+        .lock-screen { padding: 20px 10px; }
+        .input-group { margin: 20px 0 15px; }
+        input[type="password"] {
+            width: 100%; padding: 14px 18px; border: 2px solid #e2e8f0;
+            border-radius: 12px; font-size: 18px; outline: none;
+            text-align: center; letter-spacing: 6px;
+        }
+        .btn-submit {
+            width: 100%; padding: 14px; background: #2b6cb0;
+            color: #ffffff; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
+        }
+        .error-msg { color: #e53e3e; font-size: 14px; margin-top: 12px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="container" id="publicCard">
+        <img src="photo1.jpg" alt="Photo" class="photo-frame">
+        <div class="shayari-box">
+            <button class="secret-heart" onclick="openLockScreen()">♥</button>
+            कुछ पल तस्वीरों में नहीं,<br>
+            दिल में कैद होते हैं...
+        </div>
+    </div>
+
+    <div class="container hidden" id="lockCard">
+        <div class="lock-screen">
+            <div class="input-group">
+                <input type="password" id="passInput" placeholder="Password" maxlength="10">
+            </div>
+            <button class="btn-submit" onclick="verifyPassword()">Continue</button>
+            <div class="error-msg" id="errorMsg">Wrong Password</div>
+        </div>
+    </div>
+
+    <div class="container hidden" id="privateCard">
+        <video id="secretVideo" class="video-frame" controls autoplay loop playsinline muted>
+            <source src="reel.mp4" type="video/mp4">
+        </video>
+        <div class="shayari-box" style="color: #2d3748; font-weight: 600;">
+            "कुछ पल तस्वीरों में नहीं,<br>
+            दिल में कैद होते हैं..."
+        </div>
+    </div>
+
+    <script>
+        const SECRET_PIN = "1234";
+        function openLockScreen() {
+            document.getElementById('publicCard').classList.add('hidden');
+            document.getElementById('lockCard').classList.remove('hidden');
+            document.getElementById('passInput').focus();
+        }
+        function verifyPassword() {
+            const userPin = document.getElementById('passInput').value;
+            if (userPin === SECRET_PIN) {
+                document.getElementById('lockCard').classList.add('hidden');
+                document.getElementById('privateCard').classList.remove('hidden');
+                document.getElementById('secretVideo').play();
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+                document.getElementById('passInput').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
